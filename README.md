@@ -45,3 +45,20 @@ Given an array of integers `nums` and an integer `target`, return the indices of
 
 [2026/03/12]
 Just write down something.
+
+## GitHub Actions CI/CD Details:
+1. Workflow Configuration Details
+  - Complete breakdown of YAML file
+  - Triggers: Push and PR events on both main and planning branches.
+  - Detailed 9-step job process with all the tools and commands.
+
+2. Recommended CI Workflow Best Practices
+  - Multi-language support in single workflow.
+  - Container validation approach.
+  - Cross-platform compatibility.
+  - Automated triggers and version pinning.
+  - Comprehensive testing strategy.
+
+3. Workflow Status Badge
+  - Ready-to-use markdown code for adding CI/CD status badges.
+  - Links for monitoring both main & current branch workflows.
