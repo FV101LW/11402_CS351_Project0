@@ -13,7 +13,7 @@ std::vector<int> TwoSumArray(const std::vector<int>& nums, int target) {
     return {};
 }
 
-std::vector<int> ToSumHashTable(const std::vector<int>& nums, int target) {
+std::vector<int> TwoSumHashTable(const std::vector<int>& nums, int target) {
     std::unordered_map<int, int> seen;
     for (int i = 0; i < static_cast<int>(nums.size()); ++i) {
         int complement = target - nums[i];
@@ -57,29 +57,42 @@ bool ValidateTwoSumResult(const std::vector<int>& nums, int target, const std::v
     return nums[i] + nums[j] == target;
 }
 
-void RunTwoSumTests() {
+bool RunTwoSumTests() {
     struct TestCase {
         std::vector<int> nums;
         int target;
     };
 
     const std::vector<TestCase> testCases = {
-        {{2, 7, 11, 15}, 9},
-        {{-3, 4, 1, 2}, -1},
-        {{3, 3, 4}, 6},
-        {{0, 4, 3, 0}, 0},
-        {{1, 5}, 6},
+        {{2, 7, 11, 15}, 9},      // Basic case
+        {{-3, 4, 1, 2}, -1},      // Negative numbers
+        {{3, 3, 4}, 6},           // Duplicate numbers
+        {{0, 4, 3, 0}, 0},        // Zero values
+        {{1, 5}, 6},              // Small array
+        {{1, 2, 3, 4}, 10},       // No solution
+        {{}, 5},                  // Empty array
+        {{5}, 10},                // Single element
+        {{1, 2, 3}, 5},           // Large target
+        {{-1, -2, -3}, -5},       // All negative
+        {{1000000, 2000000, 3000000}, 3000000}, // Large numbers
     };
 
+    bool allPassed = true;
     for (const auto& test : testCases) {
         auto resultArray = TwoSumArray(test.nums, test.target);
-        auto resultHash = ToSumHashTable(test.nums, test.target);
+        auto resultHash = TwoSumHashTable(test.nums, test.target);
 
-        if (!ValidateTwoSumResult(test.nums, test.target, resultArray)) {
+        bool arrayValid = ValidateTwoSumResult(test.nums, test.target, resultArray);
+        bool hashValid = ValidateTwoSumResult(test.nums, test.target, resultHash);
+
+        if (!arrayValid) {
             std::cerr << "TwoSumArray failed for target " << test.target << "\n";
+            allPassed = false;
         }
-        if (!ValidateTwoSumResult(test.nums, test.target, resultHash)) {
-            std::cerr << "ToSumHashTable failed for target " << test.target << "\n";
+        if (!hashValid) {
+            std::cerr << "TwoSumHashTable failed for target " << test.target << "\n";
+            allPassed = false;
         }
     }
+    return allPassed;
 }
