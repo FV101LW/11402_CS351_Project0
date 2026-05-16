@@ -1,53 +1,85 @@
 # 11402_CS351_Project0
 Project Null for CS351 (AI-Assisted Software Dev)
-# Da Twosome Problem
 
-## Problem Statement
+## The Two Sum Problem
 
 Given an array of integers `nums` and an integer `target`, return the indices of the two numbers that add up to the target. You may assume that each input has exactly one solution, and you cannot use the same element twice.
 
-## Example
+### Example
 
 **Input:** `nums = [2, 7, 11, 15]`, `target = 9`  
 **Output:** `[0, 1]`  
 **Explanation:** `nums[0] + nums[1] = 2 + 7 = 9`
 
-## Constraints
+### Constraints
 
 - `2 <= nums.length <= 10^4`
 - `-10^9 <= nums[i] <= 10^9`
 - `-10^9 <= target <= 10^9`
 - Only one valid answer exists per input.
 
-## Requirements
+## Implementations
 
-1. Provide 2 solution implementations (e.g., in different languages or using different approaches).
-  - TwoSumArray: A direct array-based approach.
-  - ToSumHashTable: A hash table-based approach using STL.
+This project provides two C++ implementations of the Two Sum problem:
 
-2. Each implementation must:
-  - Accept an integer array and a target value.
-  - Return the indices of the 2 matching elements.
-  - Avoid using the same element twice.
+1. **TwoSumArray**: Brute force approach with O(n²) time complexity
+2. **TwoSumHashTable**: Optimized approach using unordered_map with O(n) time complexity
 
-3. Include test cases for:
-  - Basic valid example.
-  - Negative numbers.
-  - Duplicate values.
-  - Zero as part of the solution.
-  - Small input sizes.
+## Building and Testing
 
-4. Add GitHub Actions for automated CI/CD (e.g., building and testing the code + trigger on pull & push request).
+### Prerequisites
+- C++ compiler (g++ recommended)
+- C++11 or later standard support
 
-5. Add Docker support for containerizing the project.
-  - Build the C++ project in a reproducible environment.
-  - Run the test suite inside a container.
+### Build Instructions
+```bash
+cd src
+g++ -std=c++11 -o two_sum_test main.cpp two_sum.cpp
+```
 
-[2026/03/12]
-Just write down something.
+### Run Tests
+```bash
+./two_sum_test
+```
 
-## GitHub Actions CI/CD Details:
-1. Workflow Configuration Details
+The test suite includes comprehensive test cases covering:
+- Basic functionality
+- Edge cases (empty array, single element, no solution)
+- Negative numbers and large values
+- Duplicate elements
+
+### GitHub Actions CI/CD
+
+The project uses GitHub Actions for automated testing. The workflow:
+- Triggers on push and pull requests to main and test branches
+- Compiles the C++ code
+- Runs the test suite
+- Reports pass/fail status
+
+Workflow file: `.github/workflows/ci.yml`
+
+## Project Structure
+
+```
+.
+├── src/
+│   ├── main.cpp          # Test driver and main function
+│   └── two_sum.cpp       # Two Sum implementations
+├── docs/
+│   ├── 04_test_plan.md   # Detailed test plan
+│   └── 05_acceptance_tests.md # Acceptance criteria
+├── .github/
+│   └── workflows/
+│       └── ci.yml        # GitHub Actions workflow
+└── README.md
+```
+
+## Documentation
+
+- [Test Plan](docs/04_test_plan.md)
+- [Acceptance Tests](docs/05_acceptance_tests.md)
+- [Software Requirements Specification](docs/02_SRS.md)
+- [Software Design Specification](docs/03_SDS.md)
   - Complete breakdown of YAML file
   - Triggers: Push and PR events on both main and planning branches.
   - Detailed 9-step job process with all the tools and commands.

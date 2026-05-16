@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, CJ11402-10-Project0_Test ]
+  pull_request:
+    branches: [ main, CJ11402-10-Project0_Test ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up C++ environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y g++ make
+
+    - name: Compile the code
+      run: |
+        cd src
+        g++ -std=c++11 -o two_sum_test main.cpp two_sum.cpp
+
+    - name: Run tests
+      run: |
+        cd src
+        echo "Running unit tests..."
+        ./two_sum_test
+        echo "Tests completed successfully"
